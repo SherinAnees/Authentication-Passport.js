@@ -23,6 +23,7 @@ mongoose.connect(
   }
 );
 
+require("./passportConfig").passport;
 //Middileware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -42,7 +43,24 @@ app.use(
   })
 );
 app.use(cookieParser());
+//Passport
+app.use(passport.initialize());
+app.use(passport.session());
 
 //Routes
-app.use("/users", require("./routes/userRoutes"));
+app.use("/", require("./routes/userRoutes"));
+// app.post("/login", (req, res, next) => {
+//   passport.authenticate("local", (err, user, info) => {
+//     if (err) throw err;
+//     if (!user) res.send("No User Exists");
+//     else {
+//       req.logIn(user, (err) => {
+//         if (err) throw err;
+//         res.send("Successfully Authenticated");
+//         console.log(req.user);
+//       });
+//     }
+//   })(req, res, next);
+// });
+
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

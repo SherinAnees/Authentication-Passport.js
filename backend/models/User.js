@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const UserSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
+    required: false,
   },
   email: {
     type: String,
@@ -12,6 +12,11 @@ const UserSchema = new mongoose.Schema({
   password: {
     type: String,
     required: false,
+  },
+  profileImg: {
+    type: String,
+    default:
+      "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
   },
   date: {
     type: Date,
