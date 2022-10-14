@@ -3,13 +3,9 @@ const router = express.Router();
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
-const passportLocal = require("passport-local").Strategy;
-require("../passportConfig").passport;
+require("../passportConfig");
 //login page
 
-router.post("/login", passport.authenticate("local"), (req, res) => {
-  res.send("success");
-});
 // router.post("/login", (req, res, next) => {
 //   passport.authenticate("local", (err, user, info) => {
 //     if (err) throw err;
@@ -23,6 +19,10 @@ router.post("/login", passport.authenticate("local"), (req, res) => {
 //     }
 //   })(req, res, next);
 // });
+router.post("/login", passport.authenticate("local"), (req, res) => {
+  console.log("logged in");
+  res.send(200);
+});
 
 //register page
 router.post("/signup", (req, res) => {
